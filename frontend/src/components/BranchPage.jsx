@@ -3,7 +3,8 @@ import ResourceSelector from "./ResourceSelector";
 
 /**
  * branch: one of ('cse','ise','ece','aiml','civil','mech')
- * This component expects `branch` prop (lowercase code). It renders year & subject selectors.
+ * This component expects `branch` prop (lowercase code).
+ * It renders year & subject selectors and then shows resource cards.
  */
 
 const SUBJECTS = {
@@ -43,9 +44,13 @@ export default function BranchPage({ branch }) {
         </p>
       </header>
 
+      {/* Year & Subject Selector */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        {/* Year */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Year</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Year
+          </label>
           <select
             value={year}
             onChange={(e) => setYear(e.target.value)}
@@ -60,15 +65,20 @@ export default function BranchPage({ branch }) {
           </select>
         </div>
 
+        {/* Subject */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Subject
+          </label>
           <select
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
             className="w-full p-3 rounded-xl border bg-gray-50"
             disabled={!year}
           >
-            <option value="">{year ? "Choose subject" : "Select year first"}</option>
+            <option value="">
+              {year ? "Choose subject" : "Select year first"}
+            </option>
             {subjects.map((s) => (
               <option key={s} value={s}>
                 {s}
@@ -78,7 +88,7 @@ export default function BranchPage({ branch }) {
         </div>
       </div>
 
-      {/* Resource selector appears when both year & subject selected */}
+      {/* Show Cards When Both Selected */}
       {year && subject ? (
         <ResourceSelector branch={branch} year={year} subject={subject} />
       ) : (
