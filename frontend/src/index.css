@@ -1,1 +1,5 @@
+.dark{
 @import "tailwindcss";
+@import "tailwindcss/preflight" layer(base);
+@import "tailwindcss/utilities" layer(utilities);
+}
