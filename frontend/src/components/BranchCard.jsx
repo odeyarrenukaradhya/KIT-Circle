@@ -2,8 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 /**
- * BranchCard - clickable card that navigates to /branch/:code
- * Hover: subtle lift & shadow, transition
+ * BranchCard – Card UI to navigate to /branch/:code
+ * Improved hover animation, better layout, accessible role/button,
+ * and modern polished look.
  */
 export default function BranchCard({ title, code }) {
   const navigate = useNavigate();
@@ -11,17 +12,50 @@ export default function BranchCard({ title, code }) {
   return (
     <div
       role="button"
+      tabIndex={0}
       onClick={() => navigate(`/branch/${code}`)}
-      className="cursor-pointer bg-white p-6 rounded-2xl border border-gray-200 shadow-sm
-                 hover:shadow-lg hover:-translate-y-2 transition-transform duration-200 ease-out"
+      onKeyDown={(e) => (e.key === "Enter" ? navigate(`/branch/${code}`) : null)}
+      className="
+        cursor-pointer select-none
+        bg-white
+        p-6
+        rounded-2xl
+        border border-gray-200
+        shadow-sm
+        hover:shadow-xl
+        hover:-translate-y-2
+        transform
+        transition-all
+        duration-200
+        ease-out
+        focus:outline-none
+        focus:ring-2
+        focus:ring-indigo-500
+      "
     >
-      <h3 className="text-xl font-semibold text-gray-900 mb-2">{title}</h3>
-      <p className="text-gray-700">Click to choose year, subject and resources.</p>
+      <h3 className="text-xl font-bold text-gray-900 mb-3">{title}</h3>
 
-      <div className="mt-4 inline-flex items-center gap-2 text-indigo-600 font-medium">
-        <span>Open</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="inline-block">
-          <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <p className="text-gray-600">
+        Choose year, subject & available academic resources.
+      </p>
+
+      <div className="mt-5 inline-flex items-center gap-2 text-indigo-600 font-medium">
+        <span>Explore</span>
+
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          className="group-hover:translate-x-1 transition-transform duration-200"
+        >
+          <path
+            d="M5 12h14M13 5l7 7-7 7"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </div>
     </div>
